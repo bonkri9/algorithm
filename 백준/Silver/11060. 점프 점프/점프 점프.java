@@ -76,11 +76,11 @@ public class Main {
 				if(nNextPoint > narrMaze.length-1)
 					continue;
 				
-				// DP 최소 경로만
-				if(narrDP[nNextPoint] >= jumper.nCount+1)
-					narrDP[nNextPoint] = jumper.nCount+1;
-				else
-					continue;
+//				// DP 최소 경로만
+//				if(narrDP[nNextPoint] >= jumper.nCount+1)
+//					narrDP[nNextPoint] = jumper.nCount+1;
+//				else
+//					continue;
 				
 				
 				// 방문처리
