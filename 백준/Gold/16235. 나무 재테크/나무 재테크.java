@@ -20,6 +20,7 @@ public class Main {
 	// 가음 - 나무 번식, 나무 나이가 5의 배수여야 번식 가능, 인접한 8개 칸에 나이 1인 나무 생김, 경계 벗어난 곳은 안 생김
 	// 겨울 - A[r][c]만큼 양분 추가
 	// K년 지난 후 살아있는 나무 개수 출력
+	
 	static int[] dr = { -1, -1, -1, 0, 0, 1, 1, 1 };
 	static int[] dc = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
@@ -72,12 +73,8 @@ public class Main {
 				}
 			} // spring
 
-			//summer
-//			for (int i = 0; i < deadTree.size(); i++) {
-//				Tree curr = deadTree.poll();
-//				feed[curr.r][curr.c] += curr.age / 2;
-//			} // summer
 			
+			//summer
 			for (Tree trees : deadTree) {
 				feed[trees.r][trees.c] += trees.age / 2;
 			} // summer
