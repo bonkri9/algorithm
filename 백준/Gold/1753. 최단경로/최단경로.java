@@ -19,13 +19,8 @@ class Node implements Comparable<Node> { // 노드 생성
 
 	@Override
 	public int compareTo(Node o) { // 비교 정렬
-		if(this.cost>o.cost) return 1;
-		else return -1;
+		return Integer.compare(this.cost, o.cost);
 	}
-//	@Override
-//	public int compareTo(Node o) { // 비교 정렬
-//		return Integer.compare(this.cost, o.cost);
-//	}
 
 }
 
