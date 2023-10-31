@@ -1,80 +1,53 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.StringTokenizer;
-
-class Point {
-	int X;
-	int nCount;
-
-	public Point(int x, int nCount) {
-		super();
-		X = x;
-		this.nCount = nCount;
-	}
-
-}
+import java.util.Scanner;
 
 public class Main {
-	static BufferedWriter bWriter = new BufferedWriter(new OutputStreamWriter(System.out));
-	static boolean[] barrVisited;
-	static int nSecond = 0;
-	static int N, K;
+    static int N;
+    static int K;
+    static int[] check = new int[100001];
 
-	public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        K = sc.nextInt();
 
-		BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
+        if (N == K) {
+            System.out.println(0);
+        } else {
+            bfs(N);
+        }
+    }
 
-		StringTokenizer st = new StringTokenizer(bReader.readLine());
+    static void bfs(int num) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(num);
+        check[num] = 1;
 
-		N = Integer.parseInt(st.nextToken()); // Subin
-		K = Integer.parseInt(st.nextToken()); // Sunbin's Sister
+        while (!q.isEmpty()) {
+            int temp = q.poll();
 
-		barrVisited = new boolean[200001];
+            for (int i = 0; i < 3; i++) {
+                int next;
 
-		// 탐색합시당
-		BFS();
+                if (i == 0) {
+                    next = temp + 1;
+                } else if (i == 1) {
+                    next = temp - 1;
+                } else {
+                    next = temp * 2;
+                }
 
-		bWriter.write(String.valueOf(nSecond));
+                if (next == K) {
+                    System.out.println(check[temp]);
+                    return;
+                }
 
-		bWriter.flush();
-		bWriter.close();
-	}
-
-	public static void BFS() throws IOException {
-
-		// subin can move -1 or +1 or *2
-		Queue<Point> queueBfs = new LinkedList<>();
-		queueBfs.add(new Point(N, 0));
-
-		int[] narrNextPoints = new int[3];
-		// BFS 돌려보자~
-		while (!queueBfs.isEmpty()) {
-			Point nXPoint = queueBfs.poll();
-
-			// 종료 조건
-			if (nXPoint.X == K) {
-				nSecond = nXPoint.nCount;
-				return;
-			}
-
-			narrNextPoints[0] = nXPoint.X - 1; // X-1
-			narrNextPoints[1] = nXPoint.X + 1; // X+1
-			narrNextPoints[2] = nXPoint.X * 2; // X*2
-			
-			for (int i = 0; i < narrNextPoints.length; i++) {
-				if (narrNextPoints[i] <= 200000 && narrNextPoints[i] >= 0 && !barrVisited[narrNextPoints[i]] ) {
-					barrVisited[narrNextPoints[i]] = true;
-					queueBfs.add(new Point(narrNextPoints[i], nXPoint.nCount + 1));
-				}
-			}
-		}
-	}
+                if (next >= 0 && next < check.length && check[next] == 0) {
+                    q.add(next);
+                    check[next] = check[temp] + 1;
+                }
+            }
+        }
+    }
 }
