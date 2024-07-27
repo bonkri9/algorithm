@@ -13,6 +13,7 @@ class Solution {
         }
         
         // key 데이터를 순회하면서 각 의상 종류의 갯수에 따른 계산
+        // {의상 갯수 + 1(안 입는 경우)} 를 다 곱하면 조합의 수 도출
         for(String key : mapCategory.keySet()){
             answer *= mapCategory.get(key) + 1;
         }
