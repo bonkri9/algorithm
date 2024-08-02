@@ -1,25 +1,24 @@
 import java.util.*;
+
 class Solution {
     public int solution(int[] citations) {
-        int answer = 0;
-        List<Integer> list = new ArrayList<>();
+        // 오름차순 정렬
+        Arrays.sort(citations);
+        int arrLen = citations.length;
         
-        for (int i = 0; i < citations.length; i++) {
-            int count = 0;
-            for (int citation : citations) {
-                if (citation >= i + 1) {
-                    count++;
-                }
-            }
-            if (count >= i + 1) {
-                list.add(i + 1);
+        // 논문 인용수 배열 길이만큼 반복
+        for(int i = 0; i < arrLen; i++){
+            // 현재 인용수보다 큰 인용수를 가진 논문 수
+            int h = arrLen - i;
+            
+            // 현재 인용수가 크면 H-Index 반환
+            if(citations[i] >= h){
+                return h;
             }
         }
         
-        if (!list.isEmpty()) {
-            answer = list.get(list.size() - 1);
-        }
-        
-        return answer;
+        // 모두 순회했는데 반환되지 않았다면
+        // H-Index가 0
+        return 0;
     }
 }
