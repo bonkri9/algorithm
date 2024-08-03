@@ -1,40 +1,48 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		StringBuilder sb = new StringBuilder();
-		int N = sc.nextInt();
-		int[] arrA = new int[N];
-		for (int i = 0; i < N; i++) {
-			arrA[i] = sc.nextInt();
-		}
+    public static void main(String[] ars) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
 
-		Arrays.sort(arrA);
+        int n = Integer.parseInt(br.readLine());
+        int[] cards = new int[n];
+        st = new StringTokenizer(br.readLine());
+        for(int i=0;i<n;i++){
+            cards[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(cards);
 
-		int M = sc.nextInt();
-		for (int i = 0; i < M; i++) {
-			int st = 0;
-			int ed = N - 1;
-			int search = sc.nextInt();
-			while (st <= ed) {
-				int mid = (st + ed) / 2;
-				if (arrA[mid] == search) {
-					sb.append(1 + " ");
-					break;
-				}
-				if (arrA[mid] > search) {
-					ed = mid - 1;
-				} else {
-					st = mid + 1;
-				}
-				if (st > ed) {
-					sb.append(0 + " ");
-					break;
-				}
-			}
-		}
-		System.out.print(sb.toString());
-	}// main
+        int m = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        for(int i=0;i<m;i++){
+            int start = 0;
+            int end = n - 1;
+
+            int target = Integer.parseInt(st.nextToken());
+
+            while(start <= end){
+                int mid = (start + end) / 2;
+                if(cards[mid] == target){
+                    sb.append(1 + " ");
+                    break;
+                }
+
+                if(cards[mid] > target){
+                    end = mid - 1;
+                }else{
+                    start = mid + 1;
+                }
+
+                if(start > end){
+                    sb.append(0 + " ");
+                    break;
+                }
+            }
+        }
+
+        System.out.print(sb.toString());
+    }
 }
