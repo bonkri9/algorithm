@@ -1,38 +1,28 @@
 class Solution {
-    public int solution( int storey) {
+    public int solution(int storey) {
 
-        int numLen = (int) (Math.log10(storey)+1);
-        int[] arr = new int[numLen+1];
-
-        for(int i=0;i<numLen;i++){
+        // 자릿수 구하기 
+        int numLen = (int) (Math.log10(storey) + 1);
+        
+        // 자릿수보다 1 크게 만들어서 배열 생성
+        int[] arr = new int[numLen + 1];
+        
+        // 1의 자리부터 역으로 배열에 삽입 
+        for(int i = 0; i < numLen; i++){
             arr[i] = storey % 10;
-            storey/=10;
+            storey /= 10;
         }
 
-        int cnt = 0;
-        for(int i=0;i<arr.length;i++){
-            if(arr[i] <5){
-                cnt += arr[i];
-
-//                if(i+1<arr.length) arr[i+1]--;
-
-            }else if(arr[i]==5){
-                cnt+=arr[i];
-                if(arr[i+1]>=5){
-                    arr[i+1]++;
-                }else{
-//                    arr[i+1]--;
-                }
+        int minStone = 0;
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] > 5 || (arr[i] == 5 && arr[i + 1] >= 5)){
+                minStone += 10 - arr[i];
+                arr[i + 1]++;
             }else{
-                cnt += 10-arr[i];
-                arr[i+1]++;
+                minStone += arr[i];
             }
         }
 
-
-
-
-        return cnt;
-
+        return minStone;
     }
 }
