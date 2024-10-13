@@ -13,3 +13,5 @@ where
     and
     month(gb.created_date) = 10
 order by gr.created_date asc, gb.title asc;
+
+# where date_formate(gb.created_date, '%Y-%m') = '2022-10'
