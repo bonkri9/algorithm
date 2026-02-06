@@ -1,17 +1,18 @@
-import java.util.Scanner;
+
+import java.io.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
 
-		Scanner sc = new Scanner(System.in);
-
-		int year = sc.nextInt();
-
-		if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
+		if (N % 400 == 0 || (N % 4 == 0 && N % 100 != 0)) {
 			System.out.println("1");
-		} else
+		} else {
 			System.out.println("0");
-
+		}
+		
 	}
+
 }
