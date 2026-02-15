@@ -6,24 +6,25 @@ public class Main {
         String isbn = br.readLine();
 
         int starIdx = -1;
-        for(int i = 0; i < 12; i++){
-            char c = isbn.charAt(i);
-            if(c=='*') starIdx = i;
-        }
-
-        int m = isbn.charAt(12) - '0';
-
         int knowSum = 0;
-        for(int i = 0; i < 12; i++){
-            if(i == starIdx) continue;
-            if(i % 2 == 0) knowSum += isbn.charAt(i) - '0';
-            else knowSum += 3 * (isbn.charAt(i) - '0');
+        for (int i = 0; i < 12; i++) {
+            char c = isbn.charAt(i);
+            if (c == '*'){
+                starIdx = i;
+                continue;
+            }
+
+            int digit = c - '0';
+            int weight = (i % 2 == 0) ? 1 : 3;
+            knowSum += weight * digit;
         }
 
-        int w = (starIdx % 2 == 0) ? 1 : 3;
+        int checkDigit = isbn.charAt(12) - '0';
+        int starWeight = (starIdx % 2 == 0) ? 1 : 3;
+
         int ans = 0;
-        for(int i = 0; i < 10; i++){
-            if((knowSum + w * i + m) % 10 == 0){
+        for (int i = 0; i < 10; i++) {
+            if ((knowSum + starWeight * i + checkDigit) % 10 == 0) {
                 ans = i;
                 break;
             }
