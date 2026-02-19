@@ -26,7 +26,7 @@ public class Main {
 		
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0; i < N; i++) {
-			sb.append(points[i][0] + " " + points[i][1]).append("\n");
+			sb.append(points[i][0]).append(" ").append(points[i][1]).append("\n");
 		}
 		
 		System.out.println(sb);
