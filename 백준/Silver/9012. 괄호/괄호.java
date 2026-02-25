@@ -11,22 +11,20 @@ public class Main {
 		for(int i = 0; i < N; i++) {
 			String s = br.readLine();
 			
-			Stack<Character> stack = new Stack<>();
+			int cnt = 0;
 			boolean isValid = true;
 			
-			for(char c : s.toCharArray()) {
-				if(c == '(') {
-					stack.push(c);
-				} else {
-					if(stack.isEmpty()) {
-						isValid = false;
-						break;
-					}
-					stack.pop();
+			for (char c : s.toCharArray()) {
+				if (c == '(') cnt++;
+				else cnt--;
+				
+				if (cnt < 0) {
+					isValid = false;
+					break;
 				}
 			}
 			
-			if(!stack.isEmpty()) isValid = false;
+			if (cnt != 0) isValid = false;
 			
 			System.out.println((isValid) ? "YES" : "NO");
 		}
